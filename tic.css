@@ -1,0 +1,77 @@
+body{
+    background-color: blueviolet;
+    text-align: center;
+}
+
+h1{
+    font-size: 80px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.start, .end_class, .reset, .waste{
+    font-size: 25px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 60px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.start:hover, .end_class:hover, .reset:hover, .waste:hover{
+    color:darkred;
+}
+
+.waste{
+    visibility: hidden;
+    font-size: 0px;
+    height: 0px;
+    width: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+.bt{
+    background-color: black;
+    color: white;
+    width: 18vmin;
+    height: 18vmin;
+    font-size: 8vmin;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 1rem rgba(0,0,0,o.9);
+    cursor: pointer;
+}
+
+.game{
+    height: 60vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.allbtn{
+    height: 60vmin;
+    width: 60vmin;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
+    margin-bottom: 10px;
+}
+
+.bt:hover{
+    color: green;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.9);
+}
+
+.winclass{
+    font-size: 40px;
+    margin-top: 0px;
+    color: white;
+    background-color: darkred;
+   
+}   
