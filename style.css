@@ -4,7 +4,7 @@ body{
 }
 
 h1{
-    font-size: 80px;
+    font-size: 8vh;
     margin-top: 0px;
     margin-bottom: 10px;
 }
@@ -37,8 +37,8 @@ h1{
 .bt{
     background-color: black;
     color: white;
-    width: 18vmin;
-    height: 18vmin;
+    width: 14vmin;
+    height: 14vmin;
     font-size: 8vmin;
     border: none;
     border-radius: 10px;
@@ -53,14 +53,13 @@ h1{
     align-items: center;
 }
 .allbtn{
-    height: 60vmin;
-    width: 60vmin;
+    height: 50vmin;
+    width: 50vmin;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 1.5vmin;
-    margin-bottom: 10px;
 }
 
 .bt:hover{
@@ -71,7 +70,6 @@ h1{
 .winclass{
     font-size: 5vh;
     margin-top: 0px;
-    color: white;
-    background-color: darkred;
-   
+    background-color: black;
+    color: darkred;
 }   
