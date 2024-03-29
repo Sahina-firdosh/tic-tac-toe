@@ -4,12 +4,12 @@ body{
 }
 
 h1{
-    font-size: 8vh;
+    font-size: 12vmin;
     margin-top: 0px;
     margin-bottom: 10px;
 }
 
-.start, .end_class, .reset, .waste{
+.start, .end_class, .reset{
     font-size: 25px;
     background-color: black;
     color: white;
@@ -21,7 +21,7 @@ h1{
     margin-bottom: 10px;
 }
 
-.start:hover, .end_class:hover, .reset:hover, .waste:hover{
+.start:hover, .end_class:hover, .reset:hover{
     color:darkred;
 }
 
@@ -37,8 +37,8 @@ h1{
 .bt{
     background-color: black;
     color: white;
-    width: 14vmin;
-    height: 14vmin;
+    width: 18vmin;
+    height: 18vmin;
     font-size: 8vmin;
     border: none;
     border-radius: 10px;
@@ -53,13 +53,14 @@ h1{
     align-items: center;
 }
 .allbtn{
-    height: 50vmin;
-    width: 50vmin;
+    height: 60vmin;
+    width: 60vmin;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 1.5vmin;
+    margin-bottom: 10px;
 }
 
 .bt:hover{
@@ -68,8 +69,10 @@ h1{
 }
 
 .winclass{
-    font-size: 5vh;
+    font-size: 8vmin;
     margin-top: 0px;
+    color: white;
     background-color: black;
     color: darkred;
+   
 }   
