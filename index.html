@@ -1,31 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <h1><u>Tic Tac Toe</u></h1>
-    <button class="start">Start Game</button>
-    <div class="game">
-        <div class="allbtn">
-            <button class="bt", class="bt1"></button>
-            <button class="bt", class="bt2"></button>
-            <button class="bt", class="bt3"></button>
-            <button class="bt", class="bt4"></button>
-            <button class="bt", class="bt5"></button>
-            <button class="bt", class="bt6"></button>
-            <button class="bt", class="bt7"></button>
-            <button class="bt", class="bt8"></button>
-            <button class="bt", class="bt9"></button>
+  <h1>Tic Tac Toe</h1>
+  <button class="btn start">Start Game</button>
+
+  <div class="game" style="display: none;">
+    <h2 class="status-msg"></h2>
+    <div class="main-area">
+        <div class="scoreboard">
+            <h3>Scoreboard</h3>
+            <table>
+            <thead>
+                <tr>
+                <th>Round</th>
+                <th>Winner</th>
+                </tr>
+            </thead>
+            <tbody class="score-table-body">
+                <!-- scores added here -->
+            </tbody>
+            </table>
         </div>
-        <br><button class="waste">waste</button><br>
-        <br><button class="end_class">End Game</button>
-        <br><button class="reset">Reset Game</button>
-        <h3 class="winclass">Winner is gjjk</h3>
+        
+        <div class="grid">
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+            <button class="cell"></button>
+        </div>
+
+        <div class="controls">
+            <button class="btn reset">Reset Game</button>
+            <button class="btn end">End Game</button>
+        </div>
     </div>
-    <script src="tic.js"></script>
+  </div>
+
+  <script src="tic.js"></script>
 </body>
 </html>
