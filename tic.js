@@ -1,114 +1,116 @@
-const startBtn = document.querySelector('.start');
-const resetBtn = document.querySelector('.reset');
-const endBtn = document.querySelector('.end');
-const gameSection = document.querySelector('.game');
-const statusMsg = document.querySelector('.status-msg');
-const cells = document.querySelectorAll('.cell');
-const scoreTableBody = document.querySelector('.score-table-body');
+const startBtn = document.querySelector(".start");
+const gameArea = document.querySelector(".game");
+const cells = document.querySelectorAll(".cell");
+const statusMsg = document.querySelector(".status-msg");
+const resetBtn = document.querySelector(".reset");
+const endBtn = document.querySelector(".end");
+const scoreTable = document.querySelector(".score-table-body");
+const strikeLine = document.querySelector(".strike-line");
 
-let board = Array(9).fill('');
-let currentPlayer = 'X';
-let gameActive = false;
-let playerX = 'Player X';
-let playerO = 'Player O';
+let currentPlayer = "X";
+let board = ["", "", "", "", "", "", "", "", ""];
+let playerX = "";
+let playerO = "";
 let round = 1;
 
-const winPatterns = [
-  [0,1,2], [3,4,5], [6,7,8],
-  [0,3,6], [1,4,7], [2,5,8],
-  [0,4,8], [2,4,6]
-];
-
-startBtn.addEventListener('click', () => {
-  playerX = prompt("Enter name for Player X") || "Player X";
-  playerO = prompt("Enter name for Player O") || "Player O";
-
-  gameSection.style.display = 'flex';
-  startBtn.style.display = 'none';
-  board = Array(9).fill('');
-  currentPlayer = 'X';
-  gameActive = true;
-  statusMsg.textContent = `${getCurrentPlayerName()}'s Turn`;
-
+startBtn.addEventListener("click", () => {
+  playerX = prompt("Enter Player 1 Name (X):") || "Player X";
+  playerO = prompt("Enter Player 2 Name (O):") || "Player O";
+  currentPlayer = "X";
+  board = ["", "", "", "", "", "", "", "", ""];
+  strikeLine.style.display = "none";
   cells.forEach(cell => {
-    cell.textContent = '';
+    cell.textContent = "";
     cell.disabled = false;
   });
+  gameArea.style.display = "block";
+  startBtn.style.display = "none";
+  updateStatus();
 });
 
-function handleClick(e, index) {
-  if (!gameActive || board[index] !== '') return;
-
-  board[index] = currentPlayer;
-  e.target.textContent = currentPlayer;
-
-  if (checkWinner()) {
-    let winnerName = getCurrentPlayerName();
-    statusMsg.textContent = `${winnerName} Wins!`;
-    gameActive = false;
-    disableCells();
-    updateScoreboard(winnerName);
-    statusMsg.style.color = '#3DFF92';
-  } else if (!board.includes('')) {
-    statusMsg.textContent = `It's a Draw!`;
-    gameActive = false;
-    updateScoreboard('Draw');
-    statusMsg.style.color = '#FFA8A8 ';
-  } else {
-    statusMsg.style.color = '#FFE66D';
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    statusMsg.textContent = `${getCurrentPlayerName()}'s Turn`;
-  }
-}
-
-function checkWinner() {
-  return winPatterns.some(pattern => {
-    const [a, b, c] = pattern;
-    return board[a] && board[a] === board[b] && board[b] === board[c];
-  });
-}
-
-function disableCells() {
-  cells.forEach(cell => cell.disabled = true);
-}
-
-resetBtn.addEventListener('click', () => {
-  board = Array(9).fill('');
-  currentPlayer = 'X';
-  gameActive = true;
-  statusMsg.style.color = '#FFE66D';
-  statusMsg.textContent = `${getCurrentPlayerName()}'s Turn`;
+resetBtn.addEventListener("click", () => {
+  board = ["", "", "", "", "", "", "", "", ""];
+  strikeLine.style.display = "none";
   cells.forEach(cell => {
-    cell.textContent = '';
+    cell.textContent = "";
     cell.disabled = false;
   });
+  currentPlayer = "X";
+  updateStatus();
 });
 
-endBtn.addEventListener('click', () => {
-  gameActive = false;
-  board = Array(9).fill('');
-  gameSection.style.display = 'none';
-  startBtn.style.display = 'inline-block';
-  statusMsg.textContent = '';
+endBtn.addEventListener("click", () => {
+  gameArea.style.display = "none";
+  startBtn.style.display = "inline-block";
 });
 
 cells.forEach((cell, index) => {
-  cell.addEventListener('click', (e) => handleClick(e, index));
+  cell.addEventListener("click", () => {
+    if (cell.textContent === "") {
+      board[index] = currentPlayer;
+      cell.textContent = currentPlayer;
+      if (checkWinner()) {
+        let winnerName = currentPlayer === "X" ? playerX : playerO;
+        statusMsg.textContent = `${winnerName} Wins!`;
+        statusMsg.style.color = "#3DFF92";
+        cells.forEach(c => c.disabled = true);
+        addToScoreboard(winnerName);
+        return;
+      }
+      if (!board.includes("")) {
+        statusMsg.textContent = "It's a Draw!";
+        statusMsg.style.color = "#FFA8A8";
+        addToScoreboard("Draw");
+        return;
+      }
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      updateStatus();
+    }
+  });
 });
 
-function getCurrentPlayerName() {
-  return currentPlayer === 'X' ? playerX : playerO;
+function updateStatus() {
+  const playerName = currentPlayer === "X" ? playerX : playerO;
+  statusMsg.textContent = `${playerName}'s Turn (${currentPlayer})`;
+  statusMsg.style.color = "#FFE66D";
 }
 
-function updateScoreboard(winner) {
-  const row = document.createElement('tr');
-  const roundCell = document.createElement('td');
-  const winnerCell = document.createElement('td');
-
-  roundCell.textContent = round;
-  winnerCell.textContent = winner;
-  row.appendChild(roundCell);
-  row.appendChild(winnerCell);
-  scoreTableBody.appendChild(row);
+function addToScoreboard(winner) {
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${round}</td><td>${winner}</td>`;
+  scoreTable.appendChild(row);
   round++;
+}
+
+function checkWinner() {
+  const winPatterns = [
+    [0, 1, 2], // Top row
+    [3, 4, 5], // Middle row
+    [6, 7, 8], // Bottom row
+    [0, 3, 6], // Left column
+    [1, 4, 7], // Middle column
+    [2, 5, 8], // Right column
+    [0, 4, 8], // Diagonal TL-BR
+    [2, 4, 6]  // Diagonal TR-BL
+  ];
+
+  for (let i = 0; i < winPatterns.length; i++) {
+    const [a, b, c] = winPatterns[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      showStrikeLine(i);
+      return true;
+    }
+  }
+  return false;
+}
+
+function showStrikeLine(index) {
+  const strikeStyles = [
+    "strike-row-1", "strike-row-2", "strike-row-3",
+    "strike-col-1", "strike-col-2", "strike-col-3",
+    "strike-diag-1", "strike-diag-2"
+  ];
+
+  strikeLine.className = `strike-line ${strikeStyles[index]}`;
+  strikeLine.style.display = "block";
 }
